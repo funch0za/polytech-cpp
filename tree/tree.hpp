@@ -5,9 +5,9 @@
 
 template <typename NodeType>
 class Tree {
-  public:
-    NodeType *head;
-  
+ public:
+  NodeType *head;
+
   virtual NodeType insert(NodeType *node, int key);
   virtual void insert(int key);
 
@@ -17,11 +17,10 @@ class Tree {
   virtual bool find(NodeType *node, int key);
   virtual bool find(int key);
 
-  virtual int find_min(int key);
-  virtual int find_min(NodeType *node, int key);
-  
-  virtual int find_max(int key);
-  virtual int find_max(NodeType *node, int key);
+  virtual int find_min();
+  virtual NodeType find_min(NodeType *node);
+
+  virtual NodeType remove_min(NodeType *node);
 };
 
 #endif
