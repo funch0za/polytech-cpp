@@ -3,27 +3,27 @@
 #include "tree_node.hpp"
 
 template <typename NodeType>
-NodeType Tree<NodeType>::insert(NodeType *node, int key) {
+NodeType* Tree<NodeType>::insert_node(NodeType *node, int key) {
   if (node == nullptr) {
     return new NodeType(key);
   }
   if (key < node->key) {
-    node->left = this->insert(node->left, key);
+    node->left = this->insert_node(node->left, key);
   } else {
-    node->right = this->insert(node->right, key);
+    node->right = this->insert_node(node->right, key);
   }
   return node;
 }
 
 template <typename NodeType>
 void Tree<NodeType>::insert(int key) {
-  this = this->insert(this->head, key);
+  this = this->insert_node(this->head, key);
 }
 
 template <typename NodeType>
-NodeType Tree<NodeType>::remove(NodeType *node, int key) {
+NodeType* Tree<NodeType>::remove_node(NodeType *node, int key) {
   if (node != nullptr) {
-    if (key == node->key) {
+    if (key == node->get_key()) {
       NodeType *left = node->left;
       NodeType *right = node->right;
       delete node;
@@ -40,10 +40,10 @@ NodeType Tree<NodeType>::remove(NodeType *node, int key) {
       min->left = left;
       return min;
     
-    } else if (key < node->key) {
-      node->left = this->remove(node->left, key);
+    } else if (key < node->get_key()) {
+      node->left = this->remove_node(node->left, key);
     } else {
-      node->right = this->remove(node->right, key);
+      node->right = this->remove_node(node->right, key);
     }
   }
   return node;
@@ -51,21 +51,21 @@ NodeType Tree<NodeType>::remove(NodeType *node, int key) {
 
 template <typename NodeType>
 void Tree<NodeType>::remove(int key) {
-  this = this->remove(this->head, key);
+  this = this->remove_node(this->head, key);
 }
 
 template <typename NodeType>
-NodeType Tree<NodeType>::find_min(NodeType *node) {
+NodeType* Tree<NodeType>::find_min(NodeType *node) {
   return node->left ? this->find_min(node->left) != nullptr : node;
 }
 
 template <typename NodeType>
 int Tree<NodeType>::find_min() {
-  return (this->find_min(this->head))->key;
+  return (this->find_min(this->head)).get_key();
 }
 
 template <typename NodeType>
-NodeType Tree<NodeType>::remove_min(NodeType *node) {
+NodeType* Tree<NodeType>::remove_min(NodeType *node) {
   if (node->left == nullptr) {
     return node->right;
   }
@@ -83,7 +83,7 @@ bool Tree<NodeType>::find(NodeType *node, int key) {
   if (node == nullptr) {
     return false;
   }
-  if (node->key == key) {
+  if (node->get_key() == key) {
     return true;
   }
   return this->find(node->left, key) || this->find(node->right, key);

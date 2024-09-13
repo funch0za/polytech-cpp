@@ -4,14 +4,17 @@
 #include "../tree.hpp"
 #include "avl_tree_node.hpp"
 
-template<typename T>
-class AvlTree: private Tree<T> {
-  AvlTree();
-  ~AvlTree();
+class AvlTree: public Tree<AvlTreeNode> {
+  public:
+    AvlTree();
+    ~AvlTree();
 
-  void balance(AvlTreeNode *node);
-  void rotate_right(AvlTreeNode *node);
-  void rotate_left(AvlTreeNode *node);
+    void insert(int key) override;
+    void remove(int key) override;
+
+    AvlTreeNode* balance(AvlTreeNode *node);
+    AvlTreeNode* rotate_right(AvlTreeNode *node);
+    AvlTreeNode* rotate_left(AvlTreeNode *node);
 };
 
 #endif

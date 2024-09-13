@@ -1,5 +1,7 @@
 #include "tree_node.hpp"
 
-int TreeNode::get_key() {
+template <typename NodeType>
+int TreeNode<NodeType>::get_key() {
   return this->key;
 }
+
