@@ -1,4 +1,4 @@
-#include "avl_tree_node.hpp"
+#include "include/avl_node.hpp"
 
 template <typename NodeType>
 int TreeNode<NodeType>::get_key() {

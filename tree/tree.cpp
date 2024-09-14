@@ -1,5 +1,8 @@
-#include "avl_tree_node.hpp"
-#include "avl_tree.hpp"
+#include "include/avl_tree.hpp"
+
+template<typename NodeType>
+Tree<NodeType>::~Tree() {
+}
 
 template <typename NodeType>
 NodeType* Tree<NodeType>::insert_node(NodeType *node, int key) {
@@ -88,9 +91,9 @@ bool Tree<NodeType>::find(int key) {
   return this->find(this->head, key);
 }
 
-AvlTree::AvlTree() {}
-
-AvlTree::~AvlTree() {}
+AvlTree::AvlTree() {
+  this->head = nullptr;
+}
 
 void AvlTree::insert(int key) {
   this->head = this->insert_node(this->head, key);

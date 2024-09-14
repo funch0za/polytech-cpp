@@ -1,12 +1,14 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include "tree_node.hpp"
+#include "node_base.hpp"
 
 template <typename NodeType>
 class Tree {
  public:
   NodeType *head;
+  
+  virtual ~Tree<NodeType>();
 
   virtual NodeType* insert_node(NodeType *node, int key);
   virtual void insert(int key);
