@@ -1,5 +1,10 @@
 #include "avl_tree_node.hpp"
 
+template <typename NodeType>
+int TreeNode<NodeType>::get_key() {
+  return this->key;
+}
+
 AvlTreeNode::AvlTreeNode(int _key) {
   this->key = _key;
   this->left = this->right = nullptr;
@@ -20,3 +25,4 @@ int AvlTreeNode::balance_factor() {
   return this->left->height - this->right->height;
 }
 
+AvlTreeNode::~AvlTreeNode() {}

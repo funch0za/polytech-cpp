@@ -2,8 +2,6 @@
 #include <iostream>
 
 int main() {
-  AvlTree at;
-  at.insert(1);
-
-  std::cout << at.find_min();
+  AvlTreeNode node(2);
+  std::cout << node.get_key();
 }
