@@ -1,17 +1,21 @@
 BIN:=avl-tree
 
+CXX:=g++ 
+CXXFLAGS:=-Wall -Werror -Wextra -g -std=c++17
+#CXXFLAGS:=-g -std=c++17
+
 all: clean build_interactive
-	g++ *.o -o $(BIN)
+	$(CXX) *.o -o $(BIN) $(CXXFLAGS)
 	rm -f *.o
 
 build_node:
-	g++ -c tree/avl-tree/avl_tree_node.cpp
+	$(CXX) -c tree/node.cpp $(CXXFLAGS)
 
 build_tree: build_node
-	g++ -c tree/avl-tree/avl_tree.cpp
+	$(CXX) -c tree/tree.cpp $(CXXFLAGS)
 
 build_interactive: build_tree
-	g++ -c interactive/main.cpp
-
+	$(CXX) -c interactive/main.cpp $(CXXFLAGS)
+ 
 clean:
 	rm -f $(BIN) *.o
