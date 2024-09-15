@@ -13,6 +13,7 @@ public:
 
   void fix_height();
   int balance_factor();
+  int get_height();
 };
 
 #endif

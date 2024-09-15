@@ -2,28 +2,35 @@
 #define TREE_H
 
 #include "node_base.hpp"
+#include <string>
 
 template <typename NodeType> class Tree {
 protected:
   NodeType *head;
+
+  virtual NodeType *remove_node(NodeType *node, int key) = 0;
+  virtual NodeType *insert_node(NodeType *node, int key) = 0;
+  virtual NodeType *remove_min(NodeType *node) = 0;
+  
+  virtual bool find(NodeType *node, int key);
+  virtual NodeType *find_min(NodeType *node);
+
+  virtual void print_graph(NodeType *node, int shift);
+  virtual void print_sorted(NodeType *node);
+
 public:
   virtual ~Tree<NodeType>();
 
-  virtual NodeType *insert_node(NodeType *node, int key) = 0;
   virtual void insert(int key) = 0;
-
-  virtual NodeType *remove_node(NodeType *node, int key) = 0;
   virtual void remove(int key) = 0;
-
-  virtual bool find(NodeType *node, int key);
+  
   virtual bool find(int key);
-
   virtual int find_min();
-  virtual NodeType *find_min(NodeType *node);
-
-  virtual NodeType *remove_min(NodeType *node) = 0;
 
   virtual bool empty();
+
+  virtual void print_graph();
+  virtual void print_sorted();
 };
 
 #endif

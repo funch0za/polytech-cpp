@@ -12,9 +12,6 @@ public:
 
   void insert(int key) override;
   void remove(int key) override;
-
-  void print();
-
 private:
   AvlTreeNode *balance(AvlTreeNode *node);
   
@@ -24,8 +21,6 @@ private:
   AvlTreeNode *insert_node(AvlTreeNode *node, int key) override;
   AvlTreeNode *remove_node(AvlTreeNode *node, int key) override;
   AvlTreeNode *remove_min(AvlTreeNode *node) override;
-
-  void print(AvlTreeNode *node);
 };
 
 #endif

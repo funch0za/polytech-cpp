@@ -1,7 +1,7 @@
 BIN:=avl-tree
 
 CXX:=g++ 
-CXXFLAGS:=-Wall -Werror -Wextra -g -std=c++17
+CXXFLAGS:=-g -std=c++17
 #CXXFLAGS:=-g -std=c++17
 
 all: clean build_interactive
