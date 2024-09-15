@@ -30,6 +30,10 @@ template <typename NodeType> bool Tree<NodeType>::find(int key) {
   return this->find(this->head, key);
 }
 
+template <typename NodeType> bool Tree<NodeType>::empty() {
+  return this->head == nullptr;
+}
+
 // --------------- AVL TREE ---------------
 
 AvlTree::AvlTree() { this->head = nullptr; }
@@ -126,24 +130,6 @@ void AvlTree::remove(int key) {
   this->head = this->remove_node(this->head, key);
 }
 
-void AvlTree::print(AvlTreeNode *node) {
-  if (node == nullptr) {
-    return;
-  }
-
-  this->print(node->left);
-  std::cout << "KEY: " << node->get_key() << " h1, h2: ";
-  if (node->left != nullptr) {
-    std::cout << node->left->height << ' ';
-  }
-  if (node->right != nullptr) {
-    std::cout << node->right->height << ' ';
-  }
-  std::cout << "BF: " << node->balance_factor();
-  std::cout << '\n';
-  this->print(node->right);
-}
-
 void AvlTree::print() { this->print(this->head); }
 
 AvlTreeNode *AvlTree::remove_min(AvlTreeNode *node) {
@@ -153,3 +139,16 @@ AvlTreeNode *AvlTree::remove_min(AvlTreeNode *node) {
   node->left = this->remove_min(node->left);
   return this->balance(node);
 }
+
+void AvlTree::print(AvlTreeNode *node) {
+  if (node == nullptr) {
+    return;
+  }
+
+  this->print(node->left);
+
+  std::cout << "key : " << node->key << " balance factor : " << node->balance_factor() << '\n';
+  
+  this->print(node->right);
+}
+

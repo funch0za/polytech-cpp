@@ -21,7 +21,7 @@ int main() {
 
   tree.print();
 
-  while (tree.head != nullptr) {
+  while (!tree.empty()) {
     std::cout << tree.find_min() << '\n';
     tree.remove(tree.find_min());
   }

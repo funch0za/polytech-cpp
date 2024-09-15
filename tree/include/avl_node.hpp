@@ -4,9 +4,10 @@
 #include "node_base.hpp"
 #include <algorithm>
 
-class AvlTreeNode : public TreeNode<AvlTreeNode> {
-public:
+class AvlTreeNode final: public TreeNode<AvlTreeNode> {
+private:
   int height;
+public:
   ~AvlTreeNode();
   AvlTreeNode(int _key);
 

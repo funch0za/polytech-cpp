@@ -4,8 +4,9 @@
 #include "node_base.hpp"
 
 template <typename NodeType> class Tree {
-public:
+protected:
   NodeType *head;
+public:
   virtual ~Tree<NodeType>();
 
   virtual NodeType *insert_node(NodeType *node, int key) = 0;
@@ -21,6 +22,8 @@ public:
   virtual NodeType *find_min(NodeType *node);
 
   virtual NodeType *remove_min(NodeType *node) = 0;
+
+  virtual bool empty();
 };
 
 #endif
