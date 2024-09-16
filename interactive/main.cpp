@@ -1,11 +1,16 @@
 #include "../tree/include/avl_tree.hpp"
 #include <iostream>
+#include <stdexcept>
 #include <vector>
 
 int main() {
   std::cout << "Enter size of sequence: ";
   int n;
   std::cin >> n;
+
+  if (n < 0) {
+    throw std::invalid_argument("size < 0");
+  }
 
   std::cout << "\nEnter sequence: ";
   AvlTree tree;

@@ -102,7 +102,6 @@ AvlTree::AvlTree() { this->head = nullptr; }
 AvlTree::~AvlTree() {}
 
 AvlTreeNode *AvlTree::rotate_left(AvlTreeNode *node) {
-  std::cerr << "rleft\n";
   AvlTreeNode *b = node->right;
   node->right = b->left;
   b->left = node;
@@ -114,7 +113,6 @@ AvlTreeNode *AvlTree::rotate_left(AvlTreeNode *node) {
 }
 
 AvlTreeNode *AvlTree::rotate_right(AvlTreeNode *node) {
-  std::cerr << "rright\n";
   AvlTreeNode *b = node->left;
   node->left = b->right;
   b->right = node;
