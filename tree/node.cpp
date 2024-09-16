@@ -23,7 +23,7 @@ void AvlTreeNode::fix_height() {
 }
 
 int AvlTreeNode::balance_factor() {
-  if (this==nullptr) {
+  if (this == nullptr) {
     return 0;
   }
 
@@ -31,14 +31,12 @@ int AvlTreeNode::balance_factor() {
     return (this->right == nullptr) ? 0 : -(this->right->height);
   }
   if (this->right == nullptr) {
-    return 0;
+    return this->left->height;
   }
 
   return this->left->height - this->right->height;
 }
 
-int AvlTreeNode::get_height() {
-return this->height;
-}
+int AvlTreeNode::get_height() { return this->height; }
 
 AvlTreeNode::~AvlTreeNode() {}

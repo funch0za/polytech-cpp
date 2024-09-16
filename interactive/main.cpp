@@ -3,19 +3,21 @@
 #include <vector>
 
 int main() {
-  std::vector<int> v = {-2,   0,  2, 10, -1, 5, 100, 132, 32,  -33, -100, 234,
-                      2544, -5, 0, 1,  2,  3, -3,  4,   -22, -32, -33,  -34};
+  std::cout << "Enter size of sequence: ";
+  int n;
+  std::cin >> n;
 
-  AvlTree tree;
-
-  for (auto &e : v) {
-    tree.insert(e);
+  std::cout << "\nEnter sequence: ";
+  std::vector<int> seq(n);
+  for (auto &elem : seq) {
+    std::cin >> elem;
   }
 
-  tree.print_sorted();
+  AvlTree tree;
+  for (auto &elem : seq) {
+    tree.insert(elem);
+  }
 
-
-
-  std::cout << '\n';
+  std::cout << "\nAvl-Tree:\n";
   tree.print_graph();
 }

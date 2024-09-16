@@ -1,6 +1,8 @@
 #include "include/avl_node.hpp"
 #include "include/avl_tree.hpp"
 
+// ------------------------- BASE --------------------------
+
 template <typename NodeType> Tree<NodeType>::~Tree() {}
 
 template <typename NodeType>
@@ -34,40 +36,63 @@ template <typename NodeType> bool Tree<NodeType>::empty() {
   return this->head == nullptr;
 }
 
-template<typename NodeType>
-void Tree<NodeType>::print_sorted(NodeType *node) {
+template <typename NodeType> void Tree<NodeType>::print_sorted(NodeType *node) {
   if (node == nullptr) {
     return;
   }
 
   this->print_sorted(node->left);
-  std::cout << node->key << ' ';  
+  std::cout << node->key << ' ';
   this->print_sorted(node->right);
 }
 
-template <typename NodeType>
-void Tree<NodeType>::print_sorted() {
+template <typename NodeType> void Tree<NodeType>::print_sorted() {
   this->print_sorted(this->head);
 }
 
-template<typename NodeType>
-void Tree<NodeType>::print_graph(NodeType *node, int shift) {
+template <typename NodeType>
+void Tree<NodeType>::print_graph(NodeType *node, std::string prefix) {
   if (node == nullptr) {
     return;
   }
 
-  for (int i = 0; i < shift; ++i) {
-    std::cout << "-";
+  if (node->left == nullptr && node->right == nullptr) {
+    return;
   }
-  std::cout << node->key << '\n';
-  
-  this->print_graph(node->left, shift + 1);
-  this->print_graph(node->right, shift + 1);
+
+  std::cout << prefix;
+  if (node->left != nullptr && node->right != nullptr) {
+    std::cout << "├──";
+  }
+  if (node->left == nullptr && node->right != nullptr) {
+    std::cout << "└──";
+  }
+  if (node->right != nullptr) {
+    std::string add_prefix = "";
+    if (node->left != nullptr &&
+        (node->right->right != nullptr || node->right->left != nullptr)) {
+      add_prefix += "│   ";
+    } else {
+      add_prefix += "    ";
+    }
+    std::cout << node->right->key << ' ' << node->balance_factor() << '\n';
+    this->print_graph(node->right, prefix + add_prefix);
+  }
+  if (node->left != nullptr) {
+    if (node->right != nullptr) {
+      std::cout << prefix;
+    }
+    std::cout << "└── " << node->left->key << ' ' << node->balance_factor() << '\n';
+    prefix += "    ";
+    this->print_graph(node->left, prefix);
+  }
 }
 
-template<typename NodeType>
-void Tree<NodeType>::print_graph() {
-  this->print_graph(this->head, 1);
+template <typename NodeType> void Tree<NodeType>::print_graph() {
+  if (this->head != nullptr) {
+    std::cout << this->head->key << '\n';
+  }
+  this->print_graph(this->head, "");
 }
 
 // --------------- AVL TREE ---------------
@@ -80,7 +105,7 @@ AvlTreeNode *AvlTree::rotate_left(AvlTreeNode *node) {
   AvlTreeNode *b = node->right;
   node->right = b->left;
   b->left = node;
-  
+
   node->fix_height();
   b->fix_height();
 
@@ -91,7 +116,7 @@ AvlTreeNode *AvlTree::rotate_right(AvlTreeNode *node) {
   AvlTreeNode *b = node->left;
   node->left = b->right;
   b->right = node;
-  
+
   node->fix_height();
   b->fix_height();
 
@@ -106,15 +131,17 @@ AvlTreeNode *AvlTree::balance(AvlTreeNode *node) {
   node->fix_height();
 
   if (node->balance_factor() == -2) {
-    if (node->left->balance_factor() == 0 || node->left->balance_factor() == -1) {
+    if (node->left->balance_factor() == 0 ||
+        node->left->balance_factor() == -1) {
       return this->rotate_left(node);
-    } 
+    }
     node->right = this->rotate_right(node->right);
     return this->rotate_left(node);
   } else if (node->balance_factor() == 2) {
-    if (node->right->balance_factor() == 0 || node->right->balance_factor() == 1) {
+    if (node->right->balance_factor() == 0 ||
+        node->right->balance_factor() == 1) {
       return this->rotate_right(node);
-    } 
+    }
     node->left = this->rotate_left(node->left);
     return this->rotate_right(node);
   }
@@ -177,5 +204,3 @@ AvlTreeNode *AvlTree::remove_min(AvlTreeNode *node) {
   node->left = this->remove_min(node->left);
   return this->balance(node);
 }
-
-

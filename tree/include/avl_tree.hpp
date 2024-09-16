@@ -5,16 +5,17 @@
 #include "tree_base.hpp"
 #include <iostream>
 
-class AvlTree final: public Tree<AvlTreeNode> {
+class AvlTree final : public Tree<AvlTreeNode> {
 public:
   AvlTree();
   ~AvlTree();
 
   void insert(int key) override;
   void remove(int key) override;
+
 private:
   AvlTreeNode *balance(AvlTreeNode *node);
-  
+
   AvlTreeNode *rotate_right(AvlTreeNode *node);
   AvlTreeNode *rotate_left(AvlTreeNode *node);
 
