@@ -41,3 +41,21 @@ make
 ```
 make test
 ```
+
+Структура проекта:
+```
+├── interactive
+│   └── main.cpp
+├── Makefile
+├── README.md
+├── test
+│   └── run_tests.sh
+└── tree
+    ├── include
+    │   ├── avl_node.hpp
+    │   ├── avl_tree.hpp
+    │   ├── node_base.hpp
+    │   └── tree_base.hpp
+    ├── node.cpp
+    └── tree.cpp
+```
