@@ -8,14 +8,11 @@ int main() {
   std::cin >> n;
 
   std::cout << "\nEnter sequence: ";
-  std::vector<int> seq(n);
-  for (auto &elem : seq) {
-    std::cin >> elem;
-  }
-
   AvlTree tree;
-  for (auto &elem : seq) {
-    tree.insert(elem);
+  while (n--) {
+    int new_key;
+    std::cin >> new_key;
+    tree.insert(new_key);
   }
 
   std::cout << "\nAvl-Tree:\n";

@@ -75,14 +75,14 @@ void Tree<NodeType>::print_graph(NodeType *node, std::string prefix) {
     } else {
       add_prefix += "    ";
     }
-    std::cout << node->right->key << ' ' << node->balance_factor() << '\n';
+    std::cout << node->right->key << '\n';
     this->print_graph(node->right, prefix + add_prefix);
   }
   if (node->left != nullptr) {
     if (node->right != nullptr) {
       std::cout << prefix;
     }
-    std::cout << "└── " << node->left->key << ' ' << node->balance_factor() << '\n';
+    std::cout << "└── " << node->left->key << '\n';
     prefix += "    ";
     this->print_graph(node->left, prefix);
   }
@@ -102,6 +102,7 @@ AvlTree::AvlTree() { this->head = nullptr; }
 AvlTree::~AvlTree() {}
 
 AvlTreeNode *AvlTree::rotate_left(AvlTreeNode *node) {
+  std::cerr << "rleft\n";
   AvlTreeNode *b = node->right;
   node->right = b->left;
   b->left = node;
@@ -113,6 +114,7 @@ AvlTreeNode *AvlTree::rotate_left(AvlTreeNode *node) {
 }
 
 AvlTreeNode *AvlTree::rotate_right(AvlTreeNode *node) {
+  std::cerr << "rright\n";
   AvlTreeNode *b = node->left;
   node->left = b->right;
   b->right = node;

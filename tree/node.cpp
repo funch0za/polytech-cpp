@@ -28,8 +28,12 @@ int AvlTreeNode::balance_factor() {
   }
 
   if (this->left == nullptr) {
-    return (this->right == nullptr) ? 0 : -(this->right->height);
+    if (this->right == nullptr) {
+      return 0;
+    }
+    return -(this->right->height);
   }
+
   if (this->right == nullptr) {
     return this->left->height;
   }
