@@ -45,17 +45,17 @@ make test
 Структура проекта:
 ```
 ├── interactive
-│   └── main.cpp
+│   └── main.cpp -- Ввод последовательности и вывод сформированного АВЛ-дерева.
 ├── Makefile
 ├── README.md
 ├── test
-│   └── run_tests.sh
+│   └── run_tests.sh -- Тестовые данные.
 └── tree
     ├── include
-    │   ├── avl_node.hpp
-    │   ├── avl_tree.hpp
-    │   ├── node_base.hpp
-    │   └── tree_base.hpp
-    ├── node.cpp
-    └── tree.cpp
+    │   ├── avl_node.hpp -- Класс узла АВЛ-дерева.
+    │   ├── avl_tree.hpp -- Класс АВЛ-дерева.
+    │   ├── node_base.hpp -- Абстрактный класс узла.
+    │   └── tree_base.hpp -- Абстрактный класс дерева.
+    ├── node.cpp -- Реализация узла.
+    └── tree.cpp -- Реализация дерева.
 ```
