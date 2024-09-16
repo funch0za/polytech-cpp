@@ -4,7 +4,9 @@ CXX:=g++
 CXXFLAGS:=-g -std=c++17
 #CXXFLAGS:=-g -std=c++17
 
-all: clean build_interactive
+all: clean bin
+
+bin: build_interactive
 	$(CXX) *.o -o $(BIN) $(CXXFLAGS)
 	rm -f *.o
 
@@ -17,5 +19,8 @@ build_tree: build_node
 build_interactive: build_tree
 	$(CXX) -c interactive/main.cpp $(CXXFLAGS)
  
+test: bin
+	sh test/run_tests.sh
+
 clean:
 	rm -f $(BIN) *.o
