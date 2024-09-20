@@ -8,5 +8,8 @@ echo "8 -1 2 -3 40 -34 89 102 103" > test.txt && ./avl-tree < test.txt
 echo "3 102 21 108" > test.txt && ./avl-tree < test.txt
 echo "5 5 5 5 5 5" > test.txt && ./avl-tree < test.txt
 echo "9 777 108 21 228 102 2021 -77 -3 0" > test.txt && ./avl-tree < test.txt
+echo "10 -20 30 -30 -44 -55 20 45 -66 102 1000" > test.txt && ./avl-tree < test.txt
+echo "6 -1 -2 -3 -5 0 1" > test.txt && ./avl-tree < test.txt
+echo "10 0 -1 -2 -3 -4 -5 -6 -7 -8 -9" > test.txt && ./avl-tree < test.txt
 
 rm -f test.txt
