@@ -11,7 +11,7 @@ int main() {
   if (n < 0) {
     throw std::invalid_argument("size < 0");
   }
-
+  
   std::cout << "\nEnter sequence: ";
   AvlTree tree;
   while (n--) {
@@ -19,6 +19,9 @@ int main() {
     std::cin >> new_key;
     tree.insert(new_key);
   }
+  
+  std::cout << "\nSorted: "; 
+  tree.print_sorted();
 
   std::cout << "\nAvl-Tree:\n";
   tree.print_graph();

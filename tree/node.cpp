@@ -1,4 +1,6 @@
 #include "include/avl_node.hpp"
+#include "include/node_base.hpp"
+#include "include/tree_base.hpp"
 
 template <typename NodeType> TreeNode<NodeType>::~TreeNode() {}
 
@@ -6,7 +8,28 @@ template <typename NodeType> int TreeNode<NodeType>::get_key() {
   return this->key;
 }
 
-AvlTreeNode::AvlTreeNode(int _key) {
+template<typename NodeType> NodeType* TreeNode<NodeType>::get_left() {
+  return this->left;
+}
+
+template<typename NodeType> NodeType* TreeNode<NodeType>::get_right() {
+  return this->right;
+}
+
+template<typename NodeType> void TreeNode<NodeType>::set_left(NodeType *node) {
+  this->left = node;
+}
+
+template<typename NodeType> void TreeNode<NodeType>::set_right(NodeType *node) {
+  this->right = node;
+}
+
+template<typename NodeType> void TreeNode<NodeType>::set_parent(NodeType *node) {
+  this->parent = node;
+}
+
+AvlTreeNode::AvlTreeNode(int _key, AvlTreeNode *parent) {
+  this->parent = parent;
   this->key = _key;
   this->left = this->right = nullptr;
   this->height = 1;

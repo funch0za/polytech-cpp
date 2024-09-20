@@ -10,7 +10,7 @@ private:
 
 public:
   ~AvlTreeNode();
-  AvlTreeNode(int _key);
+  AvlTreeNode(int _key, AvlTreeNode *parent);
 
   void fix_height();
   int balance_factor();
