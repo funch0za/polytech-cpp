@@ -1,11 +1,13 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include "node_base.hpp"
 #include <string>
 
-template <typename NodeType> class Tree {
-protected:
+#include "node_base.hpp"
+
+template <typename NodeType>
+class Tree {
+ protected:
   NodeType *head;
 
   virtual NodeType *remove_node(NodeType *node, int key) = 0;
@@ -18,7 +20,7 @@ protected:
   virtual void print_graph(NodeType *node, std::string prefix);
   virtual void print_sorted(NodeType *node);
 
-public:
+ public:
   virtual ~Tree<NodeType>();
 
   virtual void insert(int key) = 0;

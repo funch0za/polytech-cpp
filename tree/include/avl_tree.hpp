@@ -1,19 +1,20 @@
 #ifndef AVL_TREE_H
 #define AVL_TREE_H
 
-#include "avl_node.hpp"
-#include "tree_base.hpp"
 #include <iostream>
 
+#include "avl_node.hpp"
+#include "tree_base.hpp"
+
 class AvlTree final : public Tree<AvlTreeNode> {
-public:
+ public:
   AvlTree();
   ~AvlTree();
 
   void insert(int key) override;
   void remove(int key) override;
 
-private:
+ private:
   AvlTreeNode *balance(AvlTreeNode *node);
 
   AvlTreeNode *rotate_right(AvlTreeNode *node);

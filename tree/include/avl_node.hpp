@@ -1,14 +1,15 @@
 #ifndef AVL_TREE_NODE_H
 #define AVL_TREE_NODE_H
 
-#include "node_base.hpp"
 #include <algorithm>
 
+#include "node_base.hpp"
+
 class AvlTreeNode final : public TreeNode<AvlTreeNode> {
-private:
+ private:
   int height;
 
-public:
+ public:
   ~AvlTreeNode();
   AvlTreeNode(int _key, AvlTreeNode *parent);
 

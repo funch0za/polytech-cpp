@@ -3,7 +3,8 @@
 
 // ------------------------- BASE --------------------------
 
-template <typename NodeType> Tree<NodeType>::~Tree() {}
+template <typename NodeType>
+Tree<NodeType>::~Tree() {}
 
 template <typename NodeType>
 NodeType *Tree<NodeType>::find_min(NodeType *node) {
@@ -13,7 +14,8 @@ NodeType *Tree<NodeType>::find_min(NodeType *node) {
   return find_min(node->get_left());
 }
 
-template <typename NodeType> int Tree<NodeType>::find_min() {
+template <typename NodeType>
+int Tree<NodeType>::find_min() {
   return (find_min(head))->get_key();
 }
 
@@ -28,15 +30,18 @@ bool Tree<NodeType>::find(NodeType *node, int key) {
   return find(node->get_left(), key) || find(node->get_right(), key);
 }
 
-template <typename NodeType> bool Tree<NodeType>::find(int key) {
+template <typename NodeType>
+bool Tree<NodeType>::find(int key) {
   return find(head, key);
 }
 
-template <typename NodeType> bool Tree<NodeType>::empty() {
+template <typename NodeType>
+bool Tree<NodeType>::empty() {
   return head == nullptr;
 }
 
-template <typename NodeType> void Tree<NodeType>::print_sorted(NodeType *node) {
+template <typename NodeType>
+void Tree<NodeType>::print_sorted(NodeType *node) {
   if (node == nullptr) {
     return;
   }
@@ -46,7 +51,8 @@ template <typename NodeType> void Tree<NodeType>::print_sorted(NodeType *node) {
   print_sorted(node->get_right());
 }
 
-template <typename NodeType> void Tree<NodeType>::print_sorted() {
+template <typename NodeType>
+void Tree<NodeType>::print_sorted() {
   print_sorted(this->head);
 }
 
@@ -70,7 +76,8 @@ void Tree<NodeType>::print_graph(NodeType *node, std::string prefix) {
   if (node->get_right() != nullptr) {
     std::string add_prefix = "";
     if (node->get_left() != nullptr &&
-        (node->get_right()->get_right() != nullptr || node->get_right()->get_left() != nullptr)) {
+        (node->get_right()->get_right() != nullptr ||
+         node->get_right()->get_left() != nullptr)) {
       add_prefix += "│   ";
     } else {
       add_prefix += "    ";
@@ -88,7 +95,8 @@ void Tree<NodeType>::print_graph(NodeType *node, std::string prefix) {
   }
 }
 
-template <typename NodeType> void Tree<NodeType>::print_graph() {
+template <typename NodeType>
+void Tree<NodeType>::print_graph() {
   if (head != nullptr) {
     std::cout << head->get_key() << '\n';
   }
@@ -97,9 +105,7 @@ template <typename NodeType> void Tree<NodeType>::print_graph() {
 
 // --------------- AVL TREE ---------------
 
-AvlTree::AvlTree() {
-  head = nullptr;
-}
+AvlTree::AvlTree() { head = nullptr; }
 
 AvlTree::~AvlTree() {}
 
@@ -160,7 +166,7 @@ AvlTreeNode *AvlTree::insert_node(AvlTreeNode *node, int key) {
   } else {
     node->set_right(insert_node(node->get_right(), key));
   }
-   
+
   return balance(node);
 }
 
@@ -192,13 +198,9 @@ AvlTreeNode *AvlTree::remove_node(AvlTreeNode *node, int key) {
   return balance(node);
 }
 
-void AvlTree::insert(int key) {
-  head = insert_node(head, key);
-}
+void AvlTree::insert(int key) { head = insert_node(head, key); }
 
-void AvlTree::remove(int key) {
-  head = remove_node(head, key);
-}
+void AvlTree::remove(int key) { head = remove_node(head, key); }
 
 AvlTreeNode *AvlTree::remove_min(AvlTreeNode *node) {
   if (node->get_left() == nullptr) {
