@@ -10,11 +10,11 @@ NodeType *Tree<NodeType>::find_min(NodeType *node) {
   if (node->get_left() == nullptr) {
     return node;
   }
-  return this->find_min(node->get_left());
+  return find_min(node->get_left());
 }
 
 template <typename NodeType> int Tree<NodeType>::find_min() {
-  return (this->find_min(this->head))->get_key();
+  return (find_min(head))->get_key();
 }
 
 template <typename NodeType>
@@ -25,15 +25,15 @@ bool Tree<NodeType>::find(NodeType *node, int key) {
   if (node->get_key() == key) {
     return true;
   }
-  return this->find(node->get_left(), key) || this->find(node->get_right(), key);
+  return find(node->get_left(), key) || find(node->get_right(), key);
 }
 
 template <typename NodeType> bool Tree<NodeType>::find(int key) {
-  return this->find(this->head, key);
+  return find(head, key);
 }
 
 template <typename NodeType> bool Tree<NodeType>::empty() {
-  return this->head == nullptr;
+  return head == nullptr;
 }
 
 template <typename NodeType> void Tree<NodeType>::print_sorted(NodeType *node) {
@@ -41,13 +41,13 @@ template <typename NodeType> void Tree<NodeType>::print_sorted(NodeType *node) {
     return;
   }
 
-  this->print_sorted(node->get_left());
+  print_sorted(node->get_left());
   std::cout << node->get_key() << ' ';
-  this->print_sorted(node->get_right());
+  print_sorted(node->get_right());
 }
 
 template <typename NodeType> void Tree<NodeType>::print_sorted() {
-  this->print_sorted(this->head);
+  print_sorted(this->head);
 }
 
 template <typename NodeType>
@@ -76,7 +76,7 @@ void Tree<NodeType>::print_graph(NodeType *node, std::string prefix) {
       add_prefix += "    ";
     }
     std::cout << node->get_right()->get_key() << '\n';
-    this->print_graph(node->get_right(), prefix + add_prefix);
+    print_graph(node->get_right(), prefix + add_prefix);
   }
   if (node->get_left() != nullptr) {
     if (node->get_right() != nullptr) {
@@ -84,21 +84,21 @@ void Tree<NodeType>::print_graph(NodeType *node, std::string prefix) {
     }
     std::cout << "└── " << node->get_left()->get_key() << '\n';
     prefix += "    ";
-    this->print_graph(node->get_left(), prefix);
+    print_graph(node->get_left(), prefix);
   }
 }
 
 template <typename NodeType> void Tree<NodeType>::print_graph() {
-  if (this->head != nullptr) {
-    std::cout << this->head->get_key() << '\n';
+  if (head != nullptr) {
+    std::cout << head->get_key() << '\n';
   }
-  this->print_graph(this->head, "");
+  print_graph(this->head, "");
 }
 
 // --------------- AVL TREE ---------------
 
 AvlTree::AvlTree() {
-  this->head = nullptr;
+  head = nullptr;
 }
 
 AvlTree::~AvlTree() {}
@@ -135,17 +135,17 @@ AvlTreeNode *AvlTree::balance(AvlTreeNode *node) {
   if (node->balance_factor() == -2) {
     if (node->get_left()->balance_factor() == 0 ||
         node->get_left()->balance_factor() == -1) {
-      return this->rotate_left(node);
+      return rotate_left(node);
     }
-    node->set_right(this->rotate_right(node->get_right()));
-    return this->rotate_left(node);
+    node->set_right(rotate_right(node->get_right()));
+    return rotate_left(node);
   } else if (node->balance_factor() == 2) {
     if (node->get_right()->balance_factor() == 0 ||
         node->get_right()->balance_factor() == 1) {
-      return this->rotate_right(node);
+      return rotate_right(node);
     }
-    node->set_left(this->rotate_left(node->get_left()));
-    return this->rotate_right(node);
+    node->set_left(rotate_left(node->get_left()));
+    return rotate_right(node);
   }
 
   return node;
@@ -156,12 +156,12 @@ AvlTreeNode *AvlTree::insert_node(AvlTreeNode *node, int key) {
     return new AvlTreeNode(key, nullptr);
   }
   if (key < node->get_key()) {
-    node->set_left(this->insert_node(node->get_left(), key));
+    node->set_left(insert_node(node->get_left(), key));
   } else {
-    node->set_right(this->insert_node(node->get_right(), key));
+    node->set_right(insert_node(node->get_right(), key));
   }
    
-  return this->balance(node);
+  return balance(node);
 }
 
 AvlTreeNode *AvlTree::remove_node(AvlTreeNode *node, int key) {
@@ -178,32 +178,32 @@ AvlTreeNode *AvlTree::remove_node(AvlTreeNode *node, int key) {
         return left;
       }
 
-      AvlTreeNode *min = this->find_min(right);
-      min->set_right(this->remove_min(right));
+      AvlTreeNode *min = find_min(right);
+      min->set_right(remove_min(right));
       min->set_left(left);
-      return this->balance(min);
+      return balance(min);
 
     } else if (key < node->get_key()) {
-      node->set_left(this->remove_node(node->get_left(), key));
+      node->set_left(remove_node(node->get_left(), key));
     } else {
-      node->set_right(this->remove_node(node->get_right(), key));
+      node->set_right(remove_node(node->get_right(), key));
     }
   }
-  return this->balance(node);
+  return balance(node);
 }
 
 void AvlTree::insert(int key) {
-  this->head = this->insert_node(this->head, key);
+  head = insert_node(head, key);
 }
 
 void AvlTree::remove(int key) {
-  this->head = this->remove_node(this->head, key);
+  head = remove_node(head, key);
 }
 
 AvlTreeNode *AvlTree::remove_min(AvlTreeNode *node) {
   if (node->get_left() == nullptr) {
     return node->get_right();
   }
-  node->set_left(this->remove_min(node->get_left()));
-  return this->balance(node);
+  node->set_left(remove_min(node->get_left()));
+  return balance(node);
 }
